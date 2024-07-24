@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        
+        int tortoise = nums[0];
+        int hare = nums[0];
+        do{
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        }while(hare != tortoise);
+
+        tortoise = nums[0];
+        while(hare != tortoise)
+        {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
+        }
+        return hare;
+    }
+};
