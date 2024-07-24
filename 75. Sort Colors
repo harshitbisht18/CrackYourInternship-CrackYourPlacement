@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void quicksort(vector<int>& arr, int left, int right) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    if (left >= right) return;
+
+    char pivot = arr[(left + right) / 2];
+    int i = left, j = right;
+
+    while (i <= j) {
+        while (arr[i] < pivot) i++;
+        while (arr[j] > pivot) j--;
+        if (i <= j) {
+            swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    quicksort(arr, left, j);
+    quicksort(arr, i, right);
+}
+    void sortColors(vector<int>& arr) {
+       int n=arr.size();
+       quicksort(arr,0,n-1);
+        
+    }
+};
