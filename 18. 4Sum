@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>>v;
+        for(int i = 0; i < n-3; i++){
+            if(i > 0 && nums[i] == nums[i-1])continue;
+            for(int j = i + 1; j< n-2; j++){
+                if(j > i + 1 && nums[j] == nums[j-1])continue;
+                
+                long long ntar = (long long)target - ((long long)nums[i] + (long long)nums[j]);
+                int l = j + 1, h = n - 1;
+                while (l < h) {
+                int sum = nums[l] + nums[h];
+                if (sum == ntar) {
+                    v.push_back({nums[i], nums[j], nums[l], nums[h]});
+                    while (l < h && nums[l] == nums[l+1]) l++; 
+                    while (l < h && nums[h] == nums[h-1]) h--; 
+                    l++;
+                    h--;
+                } else if (sum < ntar) {
+                    l++;
+                } else {
+                    h--;
+                }
+            }
+
+            }
+            }
+        return v;
+    }
+};
