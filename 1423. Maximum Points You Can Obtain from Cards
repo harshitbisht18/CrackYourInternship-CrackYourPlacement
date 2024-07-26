@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxScore(vector<int>& arr, int k) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+        int n = arr.size();
+        int totalSum = accumulate(arr.begin(), arr.end(), 0);
+        int windowSum = accumulate(arr.begin(), arr.begin() + n - k, 0);
+        int minWindowSum = windowSum;
+        
+        for (int i = n - k; i < n; ++i) {
+            windowSum = windowSum - arr[i - (n - k)] + arr[i];
+            minWindowSum = min(minWindowSum, windowSum);
+        }
+        
+        return totalSum - minWindowSum;
+    }
+};
