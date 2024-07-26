@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+        vector<int>v;
+        int top = 0, bot = mat.size()-1, l = 0, r = mat[0].size()-1;
+        while (top <= bot && l <= r) {
+            ios::sync_with_stdio(0);
+            cin.tie(0);
+            cout.tie(0);
+            for (int i = l; i <= r; i++) {
+                v.push_back(mat[top][i]);
+            }
+            top++;
+            for (int i = top; i <= bot; i++) {
+                v.push_back(mat[i][r]);
+            }
+            r--;
+            if (top <= bot) {
+                for (int i = r; i >= l; i--) {
+                    v.push_back(mat[bot][i]);
+                }
+                bot--;
+            }
+            if (l <= r) {
+                for (int i = bot; i >= top; i--) {
+                    v.push_back(mat[i][l]);
+                }
+                l++;
+            }
+        }
+        return v;
+    }
+};
