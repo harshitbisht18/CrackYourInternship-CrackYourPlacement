@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        ios::sync_with_stdio(0);
+    		cin.tie(0);
+    		cout.tie(0);
+        int c = 0, m = 0;
+        for(auto it : nums){
+            if(c == 0){
+                m = it;
+            }
+            if(m == it){
+                c++;
+            }
+            else c--;
+        }
+        return m;
+    }
+};
