@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        unordered_map<int, int> mp;
+        int n = nums.size();
+
+        for(int i = 1; i < n; i++){
+            nums[i] += nums[i-1];
+        }
+        int ans = 0;
+        for(auto it : nums){
+            if(it == k)ans++;
+            if(mp.count(it - k))ans+=mp[it-k];
+            mp[it]++;
+        }
+        return ans;
+    }
+};
