@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int ans = 0;
+    void merge(vector<int>& nums, int l, int mid, int r) {
+        int n = mid - l + 1;
+        int m = r - mid;
+        vector<int> arr1(n);
+        vector<int> arr2(m);
+
+        for (int i = 0; i < n; ++i) {
+            arr1[i] = nums[l + i];
+        }
+        for (int i = 0; i < m; ++i) {
+            arr2[i] = nums[mid + 1 + i];
+        }
+
+        int i = 0, j = 0, k = l;
+        while (i < n && j < m) {
+            long long num = arr2[j];
+            if (arr1[i] > num * 2) {
+                ans += (n - i);
+                ++j;
+            } else {
+                ++i;
+            }
+        }
+
+        i = 0; j = 0;
+        while (i < n && j < m) {
+            if (arr1[i] <= arr2[j]) {
+                nums[k++] = arr1[i++];
+            } else {
+                nums[k++] = arr2[j++];
+            }
+        }
+        while (i < n) {
+            nums[k++] = arr1[i++];
+        }
+        while (j < m) {
+            nums[k++] = arr2[j++];
+        }
+    }
+    void mergeS(vector<int>& nums, int l, int r){
+        if(l < r){
+            int mid = l + (r - l)/2;
+            mergeS(nums, l, mid);
+            mergeS(nums, mid+1, r);
+            merge(nums, l , mid, r);
+        }
+    }
+    int reversePairs(vector<int>& nums) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        int n = nums.size();
+        mergeS(nums, 0, n-1);
+        return ans;
+    }
+};
