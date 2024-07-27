@@ -1,0 +1,21 @@
+void printDuplicateCharacters(const string& s) {
+    unordered_map<char, int> counts;
+    
+    for (char ch : s) {
+        counts[ch]++;
+    }
+    
+    set<char> duplicates;
+    
+    for (const auto& pair : counts) {
+        if (pair.second > 1) {
+            duplicates.insert(pair.first);
+        }
+    }
+    
+    cout << "Duplicate characters: ";
+    for (char ch : duplicates) {
+        cout << ch << ' ';
+    }
+    cout << endl;
+}
