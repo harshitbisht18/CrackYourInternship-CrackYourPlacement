@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& arr) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        vector<vector<int>>v = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
+        int m = arr.size();
+        int n = arr[0].size();
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                int c = 0;
+                for(auto it : v){
+                    int a = i + it[0];
+                    int b = j + it[1];
+                    if(a >= 0 && a < m && b >= 0 && b < n && (arr[a][b] == 1 || arr[a][b] == -1)) c++;
+                }
+                if(arr[i][j] == 1 )
+                {if(c < 2 || c > 3 )
+                arr[i][j] = -1;}
+                else if(arr[i][j] == 0)
+                {if(c == 3)
+                arr[i][j] = 2;}
+            }
+        }
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(arr[i][j] == -1)arr[i][j] = 0;
+                else if(arr[i][j] == 2)arr[i][j] = 1;
+            }
+        }
+    }
+};
