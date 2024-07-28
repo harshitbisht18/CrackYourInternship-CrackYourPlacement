@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        vector<string> st;
+        int n = path.size();
+        int i = 0;
+
+        while (i < n) {
+            while (i < n && path[i] == '/') i++;
+            if (i >= n) break;
+
+            string s;
+            while (i < n && path[i] != '/') {
+                s += path[i++];
+            }
+
+            if (s == "..") {
+                if (!st.empty() ) {
+                    st.pop_back();
+                }
+            } else if (s != "." && !s.empty()) {
+                st.push_back(s);
+            }
+        }
+
+        string ans;
+        for (const string& part : st) {
+            ans += "/" + part;
+        }
+        if (ans.empty()) ans = "/";
+
+        return ans;
+    }
+};
