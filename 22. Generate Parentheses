@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int n;
+    vector<string>v;
+    
+    void solve(int i, int o, int c, string s)
+    {
+       if(i==2*n-1)
+        {
+           
+            v.push_back(s);
+            return;
+        }
+        else
+        {
+        if(o<n){
+            
+            solve(i+1,o+1,c,s+'(');
+            
+        }
+        if(c<o){
+            solve(i+1,o,c+1,s+')');
+          
+       }}
+    }
+
+    vector<string> generateParenthesis(int N) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        n=N;
+        string s="(";
+        solve(0,1,0,s);
+        return v;
+    }
+};
