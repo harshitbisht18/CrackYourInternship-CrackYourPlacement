@@ -1,0 +1,21 @@
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        if(head==NULL || head->next==NULL)return head;
+        ListNode* i=head;
+        ListNode* j=head->next;
+        ListNode* temp=NULL;
+        while(j!=NULL)
+        {
+            i->next=temp;
+            temp=i;
+            i=j;
+            j=j->next;   
+        }
+        i->next=temp;
+        return i;
+    }
+};
