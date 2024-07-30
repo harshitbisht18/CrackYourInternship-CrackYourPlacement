@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+        unordered_map<char, int>mp;
+        priority_queue<int>pq;
+        for(auto i : tasks){
+            mp[i]++;
+        }
+        for(auto it : mp){
+            pq.push(it.second);
+        }
+        int extra = 0;
+        int ans = 0;
+        while(!pq.empty()){
+            vector<int>v;
+            int c = 0;
+            for(int i = 0; i <= n; i++){
+                if(!pq.empty()){
+                    v.push_back(pq.top()-1);
+                    pq.pop();
+                    c++;
+                }
+            }
+            for(auto i : v){
+                if(i>0){
+                    pq.push(i);
+                }
+            }
+            if(pq.empty()){
+                ans += c;
+            }
+            else{
+                ans += n+1;
+            }
+                
+        }
+        
+        return ans;
+    }
+};
