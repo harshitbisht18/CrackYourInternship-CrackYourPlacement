@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int minDeletions(string s) {
+        ios::sync_with_stdio(0);
+		cin.tie(0);
+		cout.tie(0);
+
+        vector<int>v(26, 0);
+
+        for(auto it : s){
+            v[it - 'a']++;
+        }
+
+        priority_queue<int>pq;
+
+        for(auto it : v){
+            if(it != 0){
+                pq.push(it);
+            }
+        }
+
+        int c = 0, curr = -1;
+        while(!pq.empty()){
+            if(curr == pq.top()){
+                curr = pq.top();
+                int x = pq.top() - 1;
+                pq.pop();
+                if(x >= 0){pq.push(x);
+                c++;}
+            }
+            else {curr = pq.top();
+            pq.pop();}
+        }
+        
+        return c;
+    }
+};
