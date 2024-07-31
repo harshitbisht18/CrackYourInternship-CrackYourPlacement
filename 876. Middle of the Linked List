@@ -1,0 +1,26 @@
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        int flag=0;
+        ListNode *p=head;
+        while(p!=NULL)
+        {
+            flag++;
+            p=p->next;
+        }
+        // if(flag%2==0)
+        flag=(flag/2)+1;
+        // else flag=ceil(flag/2);
+        int c=0;
+       p=head;
+        while(p!=NULL)
+        {
+            c++;
+            if(c==flag)
+            break;
+            p=p->next;
+        }
+        return p;
+
+    }
+};
