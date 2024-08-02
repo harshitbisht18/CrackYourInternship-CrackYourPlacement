@@ -1,0 +1,28 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head == NULL)return NULL;
+        if(head->next == NULL)return head;
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* curr = head;
+        ListNode* prev = dummy;
+        while (curr) {
+            bool duplicate = false;
+            while (curr->next && curr->val == curr->next->val) {
+                curr = curr->next;
+                duplicate = true;
+            }
+            if (duplicate) {
+                prev->next = curr->next;
+            } else {
+                prev = prev->next;
+            }
+            curr = curr->next;
+        }
+        return dummy->next;
+    }
+};
