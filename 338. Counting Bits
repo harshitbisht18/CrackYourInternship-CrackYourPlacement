@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+        vector<int> countBits(int n)
+        {
+            ios::sync_with_stdio(0);
+            cin.tie(0);
+            cout.tie(0);
+            if (!n) return {
+                n
+            };
+            vector<int> v(n + 1);
+            v[0] = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    v[i] = v[i / 2] + 1;
+                }
+                else v[i] = v[i / 2];
+            }
+            return v;
+        }
+};
