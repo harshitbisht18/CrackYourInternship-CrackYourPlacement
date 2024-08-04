@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+        vector<int>st;int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            auto it=lower_bound(st.begin(),st.end(),nums[i]);
+            if(it==st.end())
+            {
+                st.emplace_back(nums[i]);
+            }
+            else
+            {
+                *it=nums[i];
+            }
+        }
+        return st.size();
+    }
+};
