@@ -1,0 +1,40 @@
+class NumMatrix {
+public:
+    int n,m;
+    vector<vector<int>>v;
+    NumMatrix(vector<vector<int>>& mat) {
+        m = mat.size();
+        n = mat[0].size();
+       v.assign(m, vector<int>(n));
+        v[0][0] = mat[0][0];
+        for(int i = 1; i < m; i++){
+            v[i][0] = mat[i][0] + v[i-1][0];
+        }
+        for(int i = 1; i < n; i++){
+            v[0][i] = mat[0][i] + v[0][i-1];
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){                    //because of overlaping
+                v[i][j] = v[i-1][j] + v[i][j-1] + mat[i][j] - v[i-1][j-1];
+            }
+        }
+
+    }
+    
+    int sumRegion(int r1, int c1, int r2, int c2) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
+        int del = 0;
+        if(r1 != 0) del += v[r1-1][c2];
+        if(c1 != 0) del += v[r2][c1-1];
+        if(r1 != 0 && c1 != 0) del -= v[r1-1][c1-1];
+        return v[r2][c2] - del;
+    }
+};
+
+/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * NumMatrix* obj = new NumMatrix(matrix);
+ * int param_1 = obj->sumRegion(r1,c1,r2,c2);
+ */
