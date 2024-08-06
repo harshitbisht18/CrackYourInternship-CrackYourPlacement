@@ -1,0 +1,37 @@
+class Solution {
+public:
+    // vector<vector<vector<int>>> dp;
+    int solve(vector<int>& prices, int k) {
+        int n = prices.size();
+        vector<vector<int>>curr(2, vector<int>(k+1,0));
+        vector<vector<int>>next(2, vector<int>(k+1,0));
+        for(int i = n-1; i >= 0; i--){
+            for(int status = 0; status <=1; status++){
+                for(int limit = 1; limit < k+1; limit++){
+                    int buy = 0, sell = 0, skip = 0;
+
+                    if (status == 0) {
+                        buy = -prices[i] + next[1][limit];
+                    } else {
+                        sell = prices[i] + next[0][limit-1];
+                    }
+                    
+                    skip = next[status][limit];
+
+                    curr[status][limit] = max({buy, sell, skip});
+                }
+            }
+            next = curr;
+        }
+        return next[0][k];        
+    }
+
+    int maxProfit(int k, vector<int>& prices) { 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n = prices.size();
+    // dp.assign(n+1, vector<vector<int>>(2, vector<int>(3,0)));
+    return solve(prices, k); 
+    }
+};
